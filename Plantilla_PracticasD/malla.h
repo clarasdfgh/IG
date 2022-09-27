@@ -29,11 +29,11 @@ class Malla3D
 
    protected:
 
-
+   void setColor(float R, float G, float B);
 
    std::vector<Tupla3f> v ;   // tabla de coordenadas de vértices (una tupla por vértice, con tres floats)
    std::vector<Tupla3i> f ;   // una terna de 3 enteros por cada cara o triángulo
-   std::vector<Tupla3i> c ;   // P1: tabla de colores
+   std::vector<Tupla3f> c ;   // P1: tabla de colores
    
    // Completar P1: vbo y método asociado
    GLuint id_vbo_v = 0;

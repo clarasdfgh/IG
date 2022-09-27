@@ -1,2 +1,6 @@
-/Recursos
+/Docs
 *.pdf
+*.o
+*pracs_exe*
+*vgcore*
+*vlgrnd*

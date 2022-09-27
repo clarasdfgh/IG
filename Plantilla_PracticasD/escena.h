@@ -38,13 +38,12 @@ class Escena
    Cubo * cubo = nullptr ; // es importante inicializarlo a 'nullptr'
    PiramidePentagonal * piramide= nullptr ; // es importante inicializarlo a 'nullptr'
 
-   // P1: por defecto, la escena inicia con el cubo sólido
-   bool ver_cubo = true;
-   bool ver_piramide = false;
+   // P1: por defecto, la escena inicia con el cubo puntos
+   int objeto_vista = 0;   //0 cubo, 1 piramide
 
-   bool modo_punto = false;
+   bool modo_punto = true;
    bool modo_linea = false;
-   bool modo_solido = true;
+   bool modo_solido = false;
 
    
    public:

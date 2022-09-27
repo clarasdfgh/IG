@@ -35,12 +35,16 @@ void Escena::inicializar( int UI_window_width, int UI_window_height )
 	glClearColor( 1.0, 1.0, 1.0, 1.0 );// se indica cual sera el color para limpiar la ventana	(r,v,a,al)
 
 	glEnable( GL_DEPTH_TEST );	// se habilita el z-bufer
+   glEnable( GL_CULL_FACE );
 
 	Width  = UI_window_width/10;
 	Height = UI_window_height/10;
 
    change_projection( float(UI_window_width)/float(UI_window_height) );
 	glViewport( 0, 0, UI_window_width, UI_window_height );
+
+   cubo = new Cubo(50);
+   piramide = new PiramidePentagonal(100, 50);
 }
 
 
@@ -56,14 +60,46 @@ void Escena::dibujar()
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT ); // Limpiar la pantalla
 	change_observer();
-    ejes.draw();
+   ejes.draw();
+
     // COMPLETAR
     //   Dibujar los diferentes elementos de la escena
     // Habrá que tener en esta primera práctica una variable que indique qué objeto se ha de visualizar
     // y hacer 
     // cubo->draw()
     // o    piramide->draw()
-    
+
+   glLineWidth(0.5);
+   glPointSize(5);
+
+
+   if (modo_punto){
+      glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+
+      if(objeto_vista == 0)
+         cubo->draw();
+      else if(objeto_vista == 1)
+         piramide->draw();
+
+  }
+
+  if (modo_linea){
+      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+      if(objeto_vista == 0)
+         cubo->draw();
+      else if(objeto_vista == 1)
+         piramide->draw();
+  }
+
+  if (modo_solido) {
+      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+      if(objeto_vista == 0)
+         cubo->draw();
+      else if(objeto_vista == 1)
+         piramide->draw();
+  }
     
 }
 
@@ -83,20 +119,31 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
    switch( toupper(tecla) )
    {
       case 'Q' :
-         if (modoMenu!=NADA)
+         if (modoMenu!=NADA){
+            cout << endl << "MENÚ PRINCIPAL" << endl;
+            cout << "\tPulse O para modo selección de objetos" << endl;
+            cout << "\tPulse V para modo visualización" << endl;
+            cout << "\tPulse Q para salir" << endl;
             modoMenu=NADA;            
-         else {
+         } else {
             salir=true ;
          }
          break ;
       
       case 'O' :
-         // ESTAMOS EN MODO SELECCION DE OBJETO
+         cout << "Iniciado modo selección de objeto" << endl;
+         cout << "\tPulse C para cubo" << endl;
+         cout << "\tPulse P para pirámide" << endl;
+         cout << "\tPulse Q para salir" << endl;
          modoMenu=SELOBJETO; 
          break ;
       
       case 'V' :
-         // ESTAMOS EN MODO SELECCION DE MODO DE VISUALIZACION
+         cout << "Iniciado modo selección visualización:" << endl;
+         cout << "\tPulse D para puntos" << endl;
+         cout << "\tPulse L para líneas" << endl;
+         cout << "\tPulse S para sólido" << endl;
+         cout << "\tPulse Q para salir" << endl;
          modoMenu=SELVISUALIZACION;
          break ;
 
@@ -104,7 +151,8 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
       case 'C':
          // VER CUBO
          if (modoMenu==SELOBJETO){
-            ver_cubo = ver_cubo == false? true : false;
+            cout << "Viendo cubo" << endl;
+            objeto_vista = 0;
          }else{
             cout << "Para visualizar el cubo, active antes el modo selección de objeto (O)" << endl;
          }
@@ -113,7 +161,8 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
       case 'P':
          // VER PIRÁMIDE
          if (modoMenu==SELOBJETO){
-            ver_piramide = ver_piramide == false? true : false;
+            cout << "Viendo pirámide" << endl;
+            objeto_vista = 1;
          }else{
             cout << "Para visualizar la pirámide, active antes el modo selección de objeto (O)" << endl;
          }
@@ -121,18 +170,21 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
 
       case 'D':
          // MODO PUNTOS
+         cout << "Viendo en modo puntos" << endl;
          modo_punto = modo_punto == false? true : false;
          break;
       
       
       case 'L':
          // MODO LÍNEAS
+         cout << "Viendo en modo líneas" << endl;
          modo_linea = modo_linea == false? true : false;
          break;
 
          
       case 'S':
          // MODO SÓLIDO
+          cout << "Viendo en modo sólido" << endl;
          modo_solido = modo_solido == false? true : false;
          break;
             
