@@ -79,6 +79,6 @@ void Malla3D::setColor(float R, float G, float B){
 
 
    for(int i=0; i<c.size(); i++){
-      c[i] = Tupla3f(R-(i%4)/10.0, G-(i%4)/10.0, B-(i%4)/10.0);
+      c[i] = Tupla3f(R, G, B);
    }
 }

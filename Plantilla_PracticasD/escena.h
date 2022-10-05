@@ -5,6 +5,7 @@
 #include "malla.h"
 #include "cubo.h"
 #include "piramidepentagonal.h"
+#include "objply.h"
 
 typedef enum {NADA, SELOBJETO,SELVISUALIZACION} menu;
 class Escena
@@ -37,12 +38,13 @@ class Escena
    Ejes ejes;
    Cubo * cubo = nullptr ; // es importante inicializarlo a 'nullptr'
    PiramidePentagonal * piramide= nullptr ; // es importante inicializarlo a 'nullptr'
+   ObjPLY * modelo = nullptr ; 
 
    // P1: por defecto, la escena inicia con el cubo puntos
    int objeto_vista = 0;   //0 cubo, 1 piramide
 
    bool modo_punto = true;
-   bool modo_linea = false;
+   bool modo_linea = true;
    bool modo_solido = false;
 
    

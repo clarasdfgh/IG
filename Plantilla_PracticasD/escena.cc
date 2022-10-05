@@ -45,6 +45,7 @@ void Escena::inicializar( int UI_window_width, int UI_window_height )
 
    cubo = new Cubo(50);
    piramide = new PiramidePentagonal(100, 50);
+   modelo = new ObjPLY("plys/beethoven.ply");
 }
 
 
@@ -73,8 +74,70 @@ void Escena::dibujar()
    glPointSize(5);
 
 
-   if (modo_punto){
+   glPushMatrix (); 
+   glTranslatef ( 100, 0, 100 );
+
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         cubo->draw();
+      }
+
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         cubo->draw();
+      }
+
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         cubo->draw();
+      }
+
+   glPopMatrix (); 
+
+   glPushMatrix (); 
+   glTranslatef ( -100, 0, 100 );
+
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         piramide->draw();
+      }
+
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         piramide->draw();
+      }
+
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         piramide->draw();
+      }
+
+   glPopMatrix (); 
+
+   glPushMatrix (); 
+   glScalef(10,10,10);
+   glTranslatef ( -10, 10, -10 );
+
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         modelo->draw();
+      }
+
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         modelo->draw();
+      }
+
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         modelo->draw();
+      }
+
+   glPopMatrix (); 
+
+   /*if (modo_punto){
       glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+      cubo->setColor(1.00, 0.340, 0.340);
 
       if(objeto_vista == 0)
          cubo->draw();
@@ -99,7 +162,7 @@ void Escena::dibujar()
          cubo->draw();
       else if(objeto_vista == 1)
          piramide->draw();
-  }
+  }*/
     
 }
 
@@ -134,6 +197,7 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
          cout << "Iniciado modo selección de objeto" << endl;
          cout << "\tPulse C para cubo" << endl;
          cout << "\tPulse P para pirámide" << endl;
+         cout << "\tPulse M para modelo" << endl;
          cout << "\tPulse Q para salir" << endl;
          modoMenu=SELOBJETO; 
          break ;
@@ -168,24 +232,47 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
          }
          break;
 
+      case 'M':
+         // VER MODELO
+         if (modoMenu==SELOBJETO){
+            cout << "Viendo modelo" << endl;
+            objeto_vista = 2;
+         }else{
+            cout << "Para visualizar el modelo, active antes el modo selección de objeto (O)" << endl;
+         }
+         break;
+
       case 'D':
          // MODO PUNTOS
-         cout << "Viendo en modo puntos" << endl;
-         modo_punto = modo_punto == false? true : false;
+         if (modoMenu==SELVISUALIZACION){
+            cout << "Viendo en modo puntos" << endl;
+            modo_punto = modo_punto == false? true : false;
+         } else{
+            cout << "Para cambiar modo puntos, active antes el modo selección de visualización (V)" << endl;
+         }
          break;
       
       
       case 'L':
          // MODO LÍNEAS
-         cout << "Viendo en modo líneas" << endl;
-         modo_linea = modo_linea == false? true : false;
+         if (modoMenu==SELVISUALIZACION){
+            cout << "Viendo en modo líneas" << endl;
+            modo_linea = modo_linea == false? true : false;
+         } else{
+            cout << "Para cambiar modo líneas, active antes el modo selección de visualización (V)" << endl;
+         }
          break;
 
          
       case 'S':
          // MODO SÓLIDO
-          cout << "Viendo en modo sólido" << endl;
-         modo_solido = modo_solido == false? true : false;
+         if (modoMenu==SELVISUALIZACION){
+            cout << "Viendo en modo sólido" << endl;
+            modo_solido = modo_solido == false? true : false;
+         } else{
+            cout << "Para cambiar modo sólido, active antes el modo selección de visualización (V)" << endl;
+         }
+         
          break;
             
    }

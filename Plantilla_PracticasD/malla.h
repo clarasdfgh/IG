@@ -23,14 +23,12 @@ class Malla3D
    public:
 
    GLuint crearVBO(GLuint tipo_vbo, GLuint tam, GLvoid * puntero_ram);
-   
+   void setColor(float R, float G, float B);
+
    // función que dibuja el objeto en modo diferido (usando VBOs)
    void draw() ;
 
    protected:
-
-   void setColor(float R, float G, float B);
-
    std::vector<Tupla3f> v ;   // tabla de coordenadas de vértices (una tupla por vértice, con tres floats)
    std::vector<Tupla3i> f ;   // una terna de 3 enteros por cada cara o triángulo
    std::vector<Tupla3f> c ;   // P1: tabla de colores
