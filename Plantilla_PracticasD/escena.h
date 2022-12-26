@@ -6,6 +6,10 @@
 #include "cubo.h"
 #include "piramidepentagonal.h"
 #include "objply.h"
+#include "objrevolucion.h"
+#include "cilindro.h"
+#include "cono.h"
+#include "esfera.h"
 
 typedef enum {NADA, SELOBJETO,SELVISUALIZACION} menu;
 class Escena
@@ -36,12 +40,19 @@ class Escena
    menu modoMenu=NADA;
    // Objetos de la escena
    Ejes ejes;
+   
    Cubo * cubo = nullptr ; // es importante inicializarlo a 'nullptr'
    PiramidePentagonal * piramide= nullptr ; // es importante inicializarlo a 'nullptr'
+   
    ObjPLY * modelo = nullptr ; 
+   
+   ObjRevolucion * rev_ply = nullptr;
+   ObjRevolucion * rev_lista = nullptr;
 
-   // P1: por defecto, la escena inicia con el cubo puntos
-   int objeto_vista = 0;   //0 cubo, 1 piramide
+   Cilindro * cilindro = nullptr;
+   Cono * cono = nullptr;
+
+   Esfera * esfera = nullptr;
 
    bool modo_punto = true;
    bool modo_linea = true;

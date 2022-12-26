@@ -43,9 +43,25 @@ void Escena::inicializar( int UI_window_width, int UI_window_height )
    change_projection( float(UI_window_width)/float(UI_window_height) );
 	glViewport( 0, 0, UI_window_width, UI_window_height );
 
+   std::vector<Tupla3f> lista ;
+   lista.clear();
+
+   //PRUEBAS: descomentar para descendente o ascendente
+   lista.push_back({0,3,0}); lista.push_back({1,2,0}); lista.push_back({1,1,0}); lista.push_back({0,0,0});
+   //lista.push_back({0,0,0}); lista.push_back({1,1,0}); lista.push_back({1,2,0}); lista.push_back({0,3,0});
+
    cubo = new Cubo(50);
    piramide = new PiramidePentagonal(100, 50);
-   modelo = new ObjPLY("plys/beethoven.ply");
+
+   modelo = new ObjPLY("plys/ant.ply");
+
+   rev_ply = new ObjRevolucion("plys/peon.ply", 10);
+   rev_lista = new ObjRevolucion(lista, 10);
+
+   cilindro = new Cilindro(10, 3, 1);
+   cono = new Cono(10, 3, 1);
+
+   esfera = new Esfera(20, 20, 3, 1);
 }
 
 
@@ -70,8 +86,9 @@ void Escena::dibujar()
     // cubo->draw()
     // o    piramide->draw()
 
-   glLineWidth(0.5);
+   glLineWidth(2);
    glPointSize(5);
+
 
 
    glPushMatrix (); 
@@ -79,91 +96,147 @@ void Escena::dibujar()
 
       if (modo_punto){
          glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-         cubo->draw();
+         cubo->draw(0);
       }
 
       if (modo_linea){
          glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-         cubo->draw();
+         cubo->draw(1);
       }
 
       if (modo_solido){
          glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-         cubo->draw();
+         cubo->draw(2);
       }
 
    glPopMatrix (); 
-
+   
    glPushMatrix (); 
    glTranslatef ( -100, 0, 100 );
 
       if (modo_punto){
          glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-         piramide->draw();
+         piramide->draw(0);
       }
 
       if (modo_linea){
          glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-         piramide->draw();
+         piramide->draw(1);
       }
 
       if (modo_solido){
          glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-         piramide->draw();
+         piramide->draw(2);
       }
 
    glPopMatrix (); 
 
    glPushMatrix (); 
-   glScalef(10,10,10);
-   glTranslatef ( -10, 10, -10 );
+   glTranslatef ( -100, 0, -100 );
 
       if (modo_punto){
          glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-         modelo->draw();
+         modelo->draw(0);
       }
 
       if (modo_linea){
          glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-         modelo->draw();
+         modelo->draw(1);
       }
 
       if (modo_solido){
          glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-         modelo->draw();
+         modelo->draw(2);
+      }
+
+   glPopMatrix ();
+
+   glPushMatrix (); 
+   glScalef(50,50,50);
+   glTranslatef ( 0, 0, -10 );
+
+
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         rev_lista->draw(0);
+      }
+
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         rev_lista->draw(1);
+      }
+
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         rev_lista->draw(2);
       }
 
    glPopMatrix (); 
 
-   /*if (modo_punto){
-      glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-      cubo->setColor(1.00, 0.340, 0.340);
+   glPushMatrix (); 
+   glScalef(50,50,50);
+   glTranslatef ( 10, 0, -10 );
 
-      if(objeto_vista == 0)
-         cubo->draw();
-      else if(objeto_vista == 1)
-         piramide->draw();
 
-  }
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         rev_ply->draw(0);
+      }
 
-  if (modo_linea){
-      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         rev_ply->draw(1);
+      }
 
-      if(objeto_vista == 0)
-         cubo->draw();
-      else if(objeto_vista == 1)
-         piramide->draw();
-  }
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         rev_ply->draw(2);
+      }
 
-  if (modo_solido) {
-      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+   glPopMatrix (); 
 
-      if(objeto_vista == 0)
-         cubo->draw();
-      else if(objeto_vista == 1)
-         piramide->draw();
-  }*/
-    
+   glPushMatrix (); 
+   glScalef(50,50,50);
+   glTranslatef ( 10, 0, -5 );
+
+
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         cilindro->draw(0);
+      }
+
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         cilindro->draw(1);
+      }
+
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         cilindro->draw(2);
+      }
+
+   glPopMatrix (); 
+
+   glPushMatrix (); 
+   glScalef(50,50,50);
+
+
+      if (modo_punto){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+         esfera->draw(0);
+      }
+
+      if (modo_linea){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+         esfera->draw(1);
+      }
+
+      if (modo_solido){
+         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+         esfera->draw(2);
+      }
+
+   glPopMatrix (); 
 }
 
 //**************************************************************************
@@ -211,42 +284,11 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
          modoMenu=SELVISUALIZACION;
          break ;
 
-      // P1: COMPLETAR con los diferentes opciones de teclado
-      case 'C':
-         // VER CUBO
-         if (modoMenu==SELOBJETO){
-            cout << "Viendo cubo" << endl;
-            objeto_vista = 0;
-         }else{
-            cout << "Para visualizar el cubo, active antes el modo selección de objeto (O)" << endl;
-         }
-         break;
-
-      case 'P':
-         // VER PIRÁMIDE
-         if (modoMenu==SELOBJETO){
-            cout << "Viendo pirámide" << endl;
-            objeto_vista = 1;
-         }else{
-            cout << "Para visualizar la pirámide, active antes el modo selección de objeto (O)" << endl;
-         }
-         break;
-
-      case 'M':
-         // VER MODELO
-         if (modoMenu==SELOBJETO){
-            cout << "Viendo modelo" << endl;
-            objeto_vista = 2;
-         }else{
-            cout << "Para visualizar el modelo, active antes el modo selección de objeto (O)" << endl;
-         }
-         break;
-
       case 'D':
          // MODO PUNTOS
          if (modoMenu==SELVISUALIZACION){
             cout << "Viendo en modo puntos" << endl;
-            modo_punto = modo_punto == false? true : false;
+            modo_punto = !modo_punto;
          } else{
             cout << "Para cambiar modo puntos, active antes el modo selección de visualización (V)" << endl;
          }
@@ -257,7 +299,7 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
          // MODO LÍNEAS
          if (modoMenu==SELVISUALIZACION){
             cout << "Viendo en modo líneas" << endl;
-            modo_linea = modo_linea == false? true : false;
+            modo_linea = !modo_linea;
          } else{
             cout << "Para cambiar modo líneas, active antes el modo selección de visualización (V)" << endl;
          }
@@ -268,7 +310,7 @@ bool Escena::teclaPulsada( unsigned char tecla, int x, int y )
          // MODO SÓLIDO
          if (modoMenu==SELVISUALIZACION){
             cout << "Viendo en modo sólido" << endl;
-            modo_solido = modo_solido == false? true : false;
+            modo_solido = !modo_solido;
          } else{
             cout << "Para cambiar modo sólido, active antes el modo selección de visualización (V)" << endl;
          }

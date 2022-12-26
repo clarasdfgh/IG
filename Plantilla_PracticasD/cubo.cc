@@ -41,6 +41,6 @@ Cubo::Cubo(float lado)
    f[10] = Tupla3i(1,3,2);
    f[11] = Tupla3i(1,0,3);
 
-   setColor(0.525, 0.697, 0.820);
+   //setColor(0.525, 0.697, 0.820);
 }
 

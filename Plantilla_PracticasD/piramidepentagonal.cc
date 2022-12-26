@@ -39,6 +39,6 @@ PiramidePentagonal::PiramidePentagonal(float h, float r)
    f[7] = Tupla3i(4,2,3);
 
    // inicializar la/s tabla/s de colores
-   setColor(0.980, 0.608, 0.304);
+   //setColor(0.980, 0.608, 0.304);
 }
 
