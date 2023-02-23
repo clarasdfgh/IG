@@ -1,0 +1,54 @@
+V MENÚ VISUALIZACIÓN
+    -Activar/Desactivar modo puntos: D
+    -Activar/Desactivar modo líneas: L
+    -Activar/Desactivar modo sólido: S
+    -Menú iluminación: T
+        - Activar luces posicional y direccional: 0, 1
+        - Incrementar alfa o beta: A/B, >
+        - Decrementar alfa o beta: A/B, <
+
+A MENÚ ANIMACIÓN AUTOMÁTICA
+    -Activar/Desactivar animación automática: A (Automáticamente al acceder)
+    -Incrementar/Decrementar velocidad de animación: +/-
+
+M MENÚ ANIMACIÓN MANUAL
+    -Iterar las distintas 9 partes móviles del monigote: N 
+        -Torso
+        -Muslo izdo
+        -Gemelo izdo
+        -Muslo dcho
+        -Gemelo dcho
+        -Hombro izdo
+        -Codo izdo
+        -Hombro dcho
+        -Codo dcho
+    -Incrementar/Decrementar el ángulo de la parte seleccionada: +/-
+
+C MENÚ CÁMARA
+    -Selección de cámaras: 1,2,3
+        -1: Frontal. Es de perspectiva.
+        -2: Cenital. Es de perspectiva.
+        -3: Isométrica. Es de perspectiva.
+        -4: Ortogonal.
+    -Restaurar todas las cámaras a sus posiciones originales: G
+
+--
+CONTROLES DE LA CÁMARA
+    -Girar la cámara:
+        -Arrastrar con click derecho
+        -Teclas F1 a F4
+    -Mover la cámara: 
+        -Plano X,Z: Teclas de dirección
+        -Eje Y: F10, F11
+    -Zoom:
+        -Rueda del ratón
+        -AvPag, RePag
+        
+--
+CONTROLES SELECCIÓN
+    - Click izquierdo para seleccionar. Objetos seleccionables:
+        -Monigote
+        -Mesa
+        -Botella
+        
+         
